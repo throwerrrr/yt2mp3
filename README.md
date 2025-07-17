@@ -1,8 +1,13 @@
 # YT to Audio Converter
-### Always remember to support artists and buy and stream their songs. This tool is for PERSONAL, EDUCATIONAL use e.g., reference tracks.
+### Remember to support artists by buying, and streaming their songs! This tool is for PERSONAL, EDUCATIONAL use.
 
 ## Setup
-Set up your venv and install the requirements w/ `pip install -r requirements.txt`
+Set up your venv and install the requirements:
+```bash
+python -m venv .venv && \
+    source .venv/bin/activate && \ 
+    pip install -r requirements.txt
+```
 
 ## Use
 `main.py` in the root directory has `MP3Converter()`, which does all the heavy lifting, and can be used in two ways:
