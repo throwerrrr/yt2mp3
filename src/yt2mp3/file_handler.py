@@ -8,9 +8,9 @@ class FileHandler:
     def __init__(self, link, artist=None, song=None, genre=None, dir=CWD, subdir=None, filename=None):
         self.link = self.validate_youtube_url(link)
         if song != None and isinstance(song, str) == True:
-            if artist == None or isinstance(artist, str) == False:
+            if artist == None or not isinstance(artist, str):
                 raise ValueError(f"Artist parameter invalid. Must be valid if song parameter is passed.")
-            if genre == None or isinstance(genre, str) == False:
+            if genre == None or not isinstance(genre, str):
                 raise ValueError(f"Genre parameter invalid. Must be valid if song parameter is passed.")
             self.song = song.title()
             self.artist = artist.title()
@@ -38,7 +38,7 @@ class FileHandler:
             raise ValueError("Text becomes empty after sanitization")
         return sanitized
     
-    def validate_youtube_url(self,url):
+    def validate_url(self,url):
         if not isinstance(url, str):
             raise ValueError("URL must be a string")
         try:
