@@ -6,7 +6,7 @@ CWD = os.getcwd()
 
 class FileHandler:
     def __init__(self, link, artist=None, song=None, genre=None, dir=CWD, subdir=None, filename=None):
-        self.link = self.validate_youtube_url(link)
+        self.link = self.validate_url(link)
         if song != None and isinstance(song, str) == True:
             if artist == None or not isinstance(artist, str):
                 raise ValueError(f"Artist parameter invalid. Must be valid if song parameter is passed.")
