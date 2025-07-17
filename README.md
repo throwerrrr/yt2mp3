@@ -28,3 +28,4 @@ python -m venv .venv && \
         ```
 
 **Note**: Genre is used as the subdirectory.
+**Note**: _The example is my song, it is not copywrited by anyone else._
