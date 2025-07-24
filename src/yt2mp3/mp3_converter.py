@@ -2,6 +2,7 @@
 import subprocess
 from src.yt2mp3.arg_parser import MP3ConverterArgParser
 from src.yt2mp3.file_handler import FileHandler
+from src.yt2mp3.md_tracker import MDTracker
 
 class MP3Converter:
     def __init__(self, argv=None, link=None, artist=None, song=None, genre=None, subdir=None, dir=None, filename=None):
@@ -14,7 +15,6 @@ class MP3Converter:
         self.run_command()
     
     def run_command(self):
-        subprocess.call(["yt-dlp", "-P", self.file_handler.output, "-x", "--audio-format", "mp3", "-o", f"{self.file_handler.filename}.%(ext)s", self.file_handler.link])
-
-if __name__ == "__main__":
-    converter = MP3Converter() # usually called from main.py from root directory (two levels below) bc calling from here causes issues
+        result = subprocess.call(["yt-dlp", "-P", self.file_handler.output, "-x", "--audio-format", "mp3", "-o", f"{self.file_handler.filename}.%(ext)s", self.file_handler.link])
+        if result == 0:
+            md_tracker = MDTracker(self.file_handler)
