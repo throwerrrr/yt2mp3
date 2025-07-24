@@ -1,0 +1,39 @@
+[
+    {
+        "id": 1753397983.275137,
+        "date": "2025-07-24T18:59:43.275155",
+        "title": "References",
+        "dir": "/Users/kadenthrower/Desktop/References",
+        "author": "",
+        "file_data_text": "\n# References\n\n\n## Hip-Hop\n- [Mac Miller: Small Worlds](/Users/kadenthrower/Desktop/References/Hip-Hop/Mac-Miller_Small-Worlds.mp3)\n\n\n## Alternative\n- [Paramore: Playing God](/Users/kadenthrower/Desktop/References/Alternative/Paramore_Playing-God.mp3)\n- [Paramore: Big Man Little Dignity](/Users/kadenthrower/Desktop/References/Alternative/Paramore_Big-Man-Little-Dignity.mp3)\n- [Ethel Cain: American Teenager](/Users/kadenthrower/Desktop/References/Alternative/Ethel-Cain_American-Teenager.mp3)\n- [Boygenius: Not Strong Enough](/Users/kadenthrower/Desktop/References/Alternative/boygenius_Not-Strong-Enough.mp3)\n\n\n## Acoustic\n- [Lizzy Mcalpine: Ceilings](/Users/kadenthrower/Desktop/References/Acoustic/Lizzy-McAlpine_Ceilings.mp3)\n- [Role Model: Oh Gemini](/Users/kadenthrower/Desktop/References/Acoustic/ROLE-MODEL_Oh-Gemini.mp3)\n- [Harry Styles: Meet Me In The Hallway](/Users/kadenthrower/Desktop/References/Acoustic/Harry-Styles_Meet-Me-in-the-Hallway.mp3)\n\n\n## Indie\n- [Peach Pit: Alrighty Aphrodite](/Users/kadenthrower/Desktop/References/Indie/Peach-Pit_Alrighty-Aphrodite.mp3)\n- [Cafune\u0301E: Asphyxiation](/Users/kadenthrower/Desktop/References/Indie/Cafune\u0301e_Asphyxiation.mp3)\n- [Phoebe Bridgers: The Gold](/Users/kadenthrower/Desktop/References/Indie/Phoebe-Bridgers_The-Gold.mp3)\n- [Manchester Orchestra: The Gold](/Users/kadenthrower/Desktop/References/Indie/Manchester-Orchestra_The-Gold.mp3)\n- [Taylor Swift: Seven](/Users/kadenthrower/Desktop/References/Indie/Taylor-Swift_Seven.mp3)\n- [Phoebe Bridgers: Waiting Room](/Users/kadenthrower/Desktop/References/Indie/Phoebe-Bridgers_Waiting-Room.mp3)\n- [Beach Bunny: Painkiller](/Users/kadenthrower/Desktop/References/Indie/Beach-Bunny_Painkiller.mp3)\n\n\n## Folk_Country\n- [Billy Strings: In The Morning Light](/Users/kadenthrower/Desktop/References/Folk_Country/Billy-Strings_In-The-Morning-Light.mp3)\n- [Zach Bryan: Something In The Orange](/Users/kadenthrower/Desktop/References/Folk_Country/Zach-Bryan_Something-In-The-Orange.mp3)\n- [Billy Strings: Away From The Mire](/Users/kadenthrower/Desktop/References/Folk_Country/Billy-Strings_Away-From-the-Mire.mp3)\n\n\n## Pop_R&B\n- [Sabrina Carpenter: Taste](/Users/kadenthrower/Desktop/References/Pop_R&B/Sabrina-Carpenter_Taste.mp3)\n- [Sza: Saturn](/Users/kadenthrower/Desktop/References/Pop_R&B/SZA_Saturn.mp3)\n- [John Mayer: New Light](/Users/kadenthrower/Desktop/References/Pop_R&B/John-Mayer_New-Light.mp3)\n- [Chappell Roan: Good Luck Babe](/Users/kadenthrower/Desktop/References/Pop_R&B/Chappell-Roan_Good-Luck-Babe.mp3)\n\n\n## .vscode\n\n\n## Pop-Rock\n- [Elton John: Goodbye Yellow Brick Road](/Users/kadenthrower/Desktop/References/Pop-Rock/Elton-John_Goodbye-Yellow-Brick-Road.mp3)\n\n\n## Rock_Pop\n- [John Mayer: My Stupid Mouth](/Users/kadenthrower/Desktop/References/Rock_Pop/John-Mayer_My-Stupid-Mouth.mp3)\n- [Bambi: Prince](/Users/kadenthrower/Desktop/References/Rock_Pop/Bambi_Prince.mp3)\n- [John Mayer: Half Of My Heart](/Users/kadenthrower/Desktop/References/Rock_Pop/John-Mayer_Half-of-My-Heart.mp3)\n- [John Mayer: Why Georgia](/Users/kadenthrower/Desktop/References/Rock_Pop/John-Mayer_Why-Georgia.mp3)\n- [Kelly Clarkson: Behind These Hazel Eyes](/Users/kadenthrower/Desktop/References/Rock_Pop/Kelly-Clarkson_Behind-These-Hazel-Eyes.mp3)\n- [John Mayer: Something'S Missing](/Users/kadenthrower/Desktop/References/Rock_Pop/John-Mayer_Something's-Missing.mp3)\n\n",
+        "subdirs": {
+            "Hip-Hop": {
+                "is_genre": true
+            },
+            "Alternative": {
+                "is_genre": true
+            },
+            "Acoustic": {
+                "is_genre": true
+            },
+            "Indie": {
+                "is_genre": true
+            },
+            "Folk_Country": {
+                "is_genre": true
+            },
+            "Pop_R&B": {
+                "is_genre": true
+            },
+            ".vscode": {
+                "is_genre": true
+            },
+            "Pop-Rock": {
+                "is_genre": true
+            },
+            "Rock_Pop": {
+                "is_genre": true
+            }
+        }
+    }
+]
