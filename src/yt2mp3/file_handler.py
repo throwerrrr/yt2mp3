@@ -7,6 +7,7 @@ CWD = os.getcwd()
 class FileHandler:
     def __init__(self, link, artist=None, song=None, genre=None, dir=CWD, subdir=None, filename=None):
         self.link = self.validate_url(link)
+        self.dir = dir
         if song != None and isinstance(song, str) == True:
             if artist == None or not isinstance(artist, str):
                 raise ValueError(f"Artist parameter invalid. Must be valid if song parameter is passed.")
@@ -16,14 +17,15 @@ class FileHandler:
             self.artist = artist.title()
             self.genre = genre.title()
             self.subdir = self.sanitize_text(self.genre)
-            self.filename = self.sanitize_text(f"{self.artist}-{self.song}")
+            self.filename = self.sanitize_text(f"{self.artist}_{self.song}")
+            self.is_song = True
         else:
             self.song, self.artist, self.genre = None, None, None
+            self.is_song = False
             if subdir == None:
                 raise ValueError(f"Must specify subdirectory if no song")
             self.filename = self.sanitize_text(filename)
             self.subdir = self.sanitize_text(subdir)
-        self.dir = dir
         os.makedirs(os.path.join(self.dir, self.subdir), exist_ok=True)
         self.output = os.path.join(self.dir, self.subdir)
 
@@ -32,7 +34,7 @@ class FileHandler:
             raise ValueError("Text must be a string")
         
         sanitized = re.sub(r'[^\w\s\-_.]', '', text)
-        sanitized = sanitized.replace(' ', '_')
+        sanitized = sanitized.replace(' ', '-')
         sanitized = sanitized.strip('. ')
         if not sanitized:
             raise ValueError("Text becomes empty after sanitization")
