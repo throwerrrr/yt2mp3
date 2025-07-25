@@ -13,7 +13,7 @@ python -m venv .venv && \
 `main.py` in the root directory has `MP3Converter()`, which does all the heavy lifting, and can be used in two ways:
 1. CLI
     - Keep `main.py` the way it is
-    - Run the program like this:
+    - Run the program like this (arg order not important):
     - **Song Mode**:
         - `python main.py -s "song title" -a "artist" -g "genre" -d "dir" -l "link.com"`
     - **Other**:
