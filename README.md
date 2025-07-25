@@ -1,5 +1,5 @@
 # YT to Audio Converter
-### Remember to support artists by buying, and streaming their songs! This tool is for PERSONAL, EDUCATIONAL use.
+### This tool is for PERSONAL, EDUCATIONAL use.
 
 ## Setup
 Set up your venv and install the requirements:
@@ -28,4 +28,3 @@ python -m venv .venv && \
         ```
 
 **Note**: Genre is used as the subdirectory.
-**Note**: _The example is my song, it is not copywrited by anyone else._
