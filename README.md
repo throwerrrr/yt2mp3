@@ -1,5 +1,5 @@
 # YT to Audio Converter
-### This tool is for PERSONAL, EDUCATIONAL use.
+### This tool is for personal, educational use.
 
 ## Setup
 Set up your venv and install the requirements:
