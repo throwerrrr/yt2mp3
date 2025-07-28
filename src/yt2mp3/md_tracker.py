@@ -3,75 +3,83 @@ from src.yt2mp3.md_file import MDFile
 from src.yt2mp3.md_formatter import MDFormatter
 from src.yt2mp3.cache import Cache
 
-class MDTracker:
-    def __init__(self, file_handler):
-        self.file_handler = file_handler
-        self.title = os.path.basename(self.file_handler.dir)
-        self.md_filepath = os.path.join(self.file_handler.dir, f"{self.title}.md")
-        self.subdirs = {}
+class MDDataTracker:
+    def __init__(self, dir, current_subdir, song_mode, cache_data):
+        self.dir = dir
+        self.current_subdir = current_subdir
+        self.md_filepath = os.path.join(dir, f"{self.title}.md")
         self.md_file = self.check_for_md_file()
-        self.discover_all_subdirs()
-        self.formatter = MDFormatter(self.md_file, self.subdirs)
-        self.formatted_file = self.format_md_file()
-        self._save_file(self.formatted_file)
+        self.cache_data = self._check_cache_data(cache_data)
+        self.cached_subdirs = self._get_cached_subdirectories(self.cache_data)
+        self.subdirs = self._discover_all_subdirs(dir, current_subdir, song_mode)
 
-    def check_for_md_file(self):
+    def check_if_md_file_exists(self):
         if os.path.exists(self.md_filepath):
-            print("MD File exists. Creating file and loading data from cache.") # DEBUG
-            md_file = MDFile(file_name=f"{self.title}.md", dir=self.file_handler.dir, md_title=self.title)
-            print("File created.")
-            meta_data = Cache()._load_from_cache()
-            if meta_data and isinstance(meta_data, dict) and 'id' in meta_data:
-                print(f"Cache loaded. Last save id: {meta_data['id']}")
-
-                if 'subdirs' in meta_data and isinstance(meta_data['subdirs'], dict):
-                    cached_subdirs = meta_data['subdirs']
-                    print(f"Loaded {len(cached_subdirs)} subdirectories from cache")
-                else:
-                    cached_subdirs = {}
-                # Store cached subdirs for later merging in discover_all_subdirs
-                self.cached_subdirs = cached_subdirs
-            else:
-                print("No valid cache data found")
-                self.cached_subdirs = {}
-            return md_file
+            print("MD File exists.")
+            return True
         else:
-            print(f"MD File at {self.md_filepath} does not exist. Creating file.")
+            print("MD File does not exist.")
+            return False
+        
+    def _check_cache_data(self, cache_data):
+        if not isinstance(cache_data, dict):
+            raise TypeError()
+        if any(key not in list(cache_data.keys()) for key in ["id", "date", "title", "dir", "author", "file_data_text", "subdirs"]):
+            raise ValueError(f"Cache data invalid.")
+        elif not isinstance(cache_data["subdirs"], dict):
+            raise TypeError(f"Invalid cache data. Subdir key should be dict, but is {type(cache_data["subdirs"])}")
+        elif not isinstance(cache_data["title"], str):
+            raise TypeError(f"Invalid cache data. Title key should be str, but is {type(cache_data["title"])}")
+        elif not isinstance(cache_data["dir"], str):
+            raise TypeError(f"Invalid cache data. Dir key should be str, but is {type(cache_data["dir"])}")
+        elif not isinstance(cache_data["author"], str):
+            raise TypeError(f"Invalid cache data. Author key should be str, but is {type(cache_data["author"])}")
+        elif not isinstance(cache_data["file_data_text", str]):
+            raise TypeError(f"Invalid cache data. File_data_text key should be dict, but is {type(cache_data["file_data_text"])}")
+        else:
+            print("Cache data is clean!")
+            return cache_data
+    
+    def get_last_save_id(self, cache_data):
+        meta_data = cache_data
+        if meta_data and isinstance(meta_data, dict) and "id" in meta_data:
+            print(f"Cache loaded.")
+            print(f"Last save id: {meta_data["id"]}")
+    
+    def _get_cached_subdirectories(self, cache_data):
+        meta_data = cache_data
+        if meta_data and isinstance(meta_data, dict) and "id" in meta_data:
+            if "subdirs" in meta_data and isinstance(meta_data["subdirs"], dict):
+                cached_subdirs = meta_data["subdirs"]
+                print(f"Loaded {len(cached_subdirs)} subdirectories from cache")
+            else:
+                cached_subdirs = {}
+            self.cached_subdirs = cached_subdirs
+        else:
+            print("No valid cache data found")
             self.cached_subdirs = {}
-            return MDFile(file_name=f"{self.title}.md", dir=self.file_handler.dir, md_title=self.title)
 
-    def discover_all_subdirs(self):
+    def get_dir_list(self, dir):
         try:
-            self.subdirs = getattr(self, 'cached_subdirs', {}).copy()
-            
-            dir_contents = os.listdir(self.file_handler.dir)
-            
+            dir_contents = os.listdir(dir)
+            return dir_contents
+        except OSError as e:
+            print(f"Error scanning directory {dir}: {e}")
+            return []
+        
+    def _discover_all_subdirs(self, dir, dir_contents, current_subdir, song_mode):
+        try:
             for item in dir_contents:
-                item_path = os.path.join(self.file_handler.dir, item)
-            
+                item_path = os.path.join(dir, item)
                 if os.path.isdir(item_path):
-                    
                     if item not in self.subdirs:
                         self.subdirs[item] = {"is_genre": True}
             
-            existing_subdirs = {subdir: metadata for subdir, metadata in self.subdirs.items() 
-                              if os.path.isdir(os.path.join(self.file_handler.dir, subdir))}
+            existing_subdirs = {subdir: metadata for subdir, metadata in self.subdirs.items() if os.path.isdir(os.path.join(dir, subdir))}
+
             self.subdirs = existing_subdirs
-            self.subdirs[self.file_handler.subdir] = {"is_genre": self.file_handler.is_song}
+            self.subdirs[current_subdir] = {"is_genre": song_mode}
             print(f"Discovered {len(self.subdirs)} total subdirectories: {list(self.subdirs.keys())}")
         except OSError as e:
-            print(f"Error scanning directory {self.file_handler.dir}: {e}")
-            self.subdirs = {self.file_handler.subdir: {"is_genre": self.file_handler.is_song}}
-
-    def format_md_file(self):
-        return self.formatter.return_md_file()
-    
-    def _save_file(self, md_file):
-        md_file.subdirs = self.subdirs
-        cache_save = Cache(md_file)._save_to_cache()
-        if cache_save is True:
-            md_file.create_md_file()
-            return True
-        else:
-            print("Process interrupted while saving to Cache.")
-            return False
+            print(f"Error scanning directory {dir}: {e}")
+            self.subdirs = {current_subdir: {"is_genre": song_mode}}

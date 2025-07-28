@@ -43,7 +43,6 @@ class FileHandler:
         return sanitized
     
     def validate_url(self,url):
-    def validate_url(self,url):
         if not isinstance(url, str):
             raise ValueError("URL must be a string")
         try:

@@ -1,8 +1,8 @@
 import os, json, datetime
 
 class Cache:
-    def __init__(self, MDFile=None):
-        self.md_file = MDFile
+    def __init__(self, md_file_export_data):
+        self.md_file = md_file_export_data
         self.cache_file = os.path.join(os.getcwd(), "cache.json")
 
     def _load_from_cache(self):
@@ -51,9 +51,9 @@ class Cache:
             print(error_msg)
             return error_msg
 
-    def _save_to_cache(self):
+    def _save_to_cache(self, md_file_export_data):
         if self.md_file is not None:
-            meta_data = {"id": datetime.datetime.now().timestamp(), "date": datetime.datetime.now().isoformat(), "title": self.md_file.md_title, "dir": self.md_file.dir, "author": self.md_file.author, "file_data_text": self.md_file.file_data_text, "subdirs": {}}
+            meta_data = md_file_export_data
             if hasattr(self.md_file, 'subdirs'):
                 meta_data["subdirs"] = self.md_file.subdirs
             else:

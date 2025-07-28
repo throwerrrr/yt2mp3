@@ -15,5 +15,12 @@ def parse_arguments(argv=None):
 
 def generate(argv):
     args = parse_arguments(argv)
-    return args
-
+    return {
+        "link": args.link,
+        "song": args.song,
+        "artist": args.artist,
+        "genre": args.genre,
+        "dir": args.dir,
+        "subdir": args.subdir,
+        "filename": args.filename
+    }
