@@ -12,15 +12,3 @@ def parse_arguments(argv=None):
     parser.add_argument('-f', '--filename', type=str, help='provide a filename (overriden by song and artist)')
     
     return parser.parse_args(argv)
-
-def generate(argv):
-    args = parse_arguments(argv)
-    return {
-        "link": args.link,
-        "song": args.song,
-        "artist": args.artist,
-        "genre": args.genre,
-        "dir": args.dir,
-        "subdir": args.subdir,
-        "filename": args.filename
-    }

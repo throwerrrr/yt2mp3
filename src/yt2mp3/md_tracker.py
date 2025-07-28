@@ -1,4 +1,4 @@
-import os, json, datetime, re
+import os
 from src.yt2mp3.md_file import MDFile
 from src.yt2mp3.md_formatter import MDFormatter
 from src.yt2mp3.cache import Cache
