@@ -13,7 +13,7 @@ def raise_errors(link=None, song=None, artist=None, genre=None, dir=None, subdir
     elif genre == None and subdir == None:
         raise ValueError("Please provide genre or subdirectory name.")
     elif dir == None:
-        dir == CWD
+        dir = CWD
     
     check_song_mode_errors(song, artist, genre)
     check_other_mode_errors(song, filename, subdir)
