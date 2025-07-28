@@ -36,11 +36,13 @@ class FileHandler:
         
         sanitized = re.sub(r'[^\w\s\-_.]', '', text)
         sanitized = sanitized.replace(' ', '-')
+        sanitized = sanitized.replace(' ', '-')
         sanitized = sanitized.strip('. ')
         if not sanitized:
             raise ValueError("Text becomes empty after sanitization")
         return sanitized
     
+    def validate_url(self,url):
     def validate_url(self,url):
         if not isinstance(url, str):
             raise ValueError("URL must be a string")
