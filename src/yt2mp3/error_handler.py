@@ -18,18 +18,10 @@ def raise_errors(link=None, song=None, artist=None, genre=None, dir=None, subdir
     check_song_mode_errors(song, artist, genre)
     check_other_mode_errors(song, filename, subdir)
 
-    return {
-        "link": link,
-        "song": song,
-        "artist": artist,
-        "genre": genre,
-        "dir": dir,
-        "subdir": subdir,
-        "filename": filename
-    }
+    return True
         
 def check_song_mode_errors(song=None, artist=None, genre=None):
-    song_mode_args = ["song", "artist", "genre"]
+    song_mode_args = [song, artist, genre]
     for arg in song_mode_args:
         if arg != None:
             for empty_arg in song_mode_args:
