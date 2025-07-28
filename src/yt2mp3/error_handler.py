@@ -12,12 +12,6 @@ def raise_errors(link=None, song=None, artist=None, genre=None, dir=None, subdir
         raise ValueError("Please provide either song or filename.")
     elif genre == None and subdir == None:
         raise ValueError("Please provide genre or subdirectory name.")
-    elif dir == None:
-        dir = CWD
-    
-    check_song_mode_errors(song, artist, genre)
-    check_other_mode_errors(song, filename, subdir)
-
     return True
         
 def check_song_mode_errors(song=None, artist=None, genre=None):
@@ -28,34 +22,18 @@ def check_song_mode_errors(song=None, artist=None, genre=None):
                 if empty_arg == None:
                     raise ValueError(f"{empty_arg} must be given a value if {arg} is not empty.")
                 
-def check_other_mode_errors(song=None, filename=None, subdir=None):
-    if filename != None and song == None:
+def check_other_mode_errors(filename=None, subdir=None):
+    if filename != None:
         if subdir == None:
             raise ValueError("Subdir must be given a value if filename is not empty.")
-    if subdir != None and song == None:
+    if subdir != None:
         if subdir == None:
             raise ValueError("Filename must be given a value if subdir is not empty.")
 
-def define_mode(link=None, song=None, artist=None, genre=None, dir=None, subdir=None, filename=None):
+def define_mode(song=None):
     if song != None:
-        {
-        "link": link,
-        "song": song,
-        "artist": artist,
-        "genre": genre,
-        "dir": dir,
-        "subdir": subdir,
-        "filename": filename,
-        "song_mode": True
-    }
+        song_mode = True
+        return song_mode
     elif song == None:
-        {
-        "link": link,
-        "song": song,
-        "artist": artist,
-        "genre": genre,
-        "dir": dir,
-        "subdir": subdir,
-        "filename": filename,
-        "song_mode": False
-    }
+        song_mode = False
+        return song_mode
