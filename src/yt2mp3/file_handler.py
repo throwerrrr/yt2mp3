@@ -24,6 +24,22 @@ class FileHandler:
             self.subdir = self.sanitize_text(subdir)
 
         self.output = os.path.join(self.dir, self.subdir)
+        
+        self._ensure_directories_exist()
+
+    def _ensure_directories_exist(self):
+        """Create the main directory and subdirectory if they don't exist."""
+        try:
+            if not os.path.exists(self.dir):
+                os.makedirs(self.dir, exist_ok=True)
+                print(f"Created main directory: {self.dir}")
+            
+            if not os.path.exists(self.output):
+                os.makedirs(self.output, exist_ok=True)
+                print(f"Created output directory: {self.output}")
+                
+        except OSError as e:
+            raise OSError(f"Failed to create directories: {e}")
 
     def create_filename(self, song, artist):
         self.filename = self.sanitize_text(f"{artist.title()}_{song.title()}")
