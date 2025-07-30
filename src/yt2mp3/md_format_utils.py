@@ -11,7 +11,7 @@ def get_subdir_file_list(subdir_path):
             subdir_file_list = os.listdir(subdir_path)
             return subdir_file_list
         except OSError as e:
-            print(f"An error occured while retrieving list of files in {os.path.basename()}")
+            print(f"An error occurred while retrieving list of files in {os.path.basename(subdir_path)}: {e}")
             return []
     print(f"Invalid subdirectory path: {subdir_path}")
     return []
@@ -32,17 +32,24 @@ def get_names_from_mp3_files(file_list, is_genre):
         else:
             cleaned_title_name = no_ext_title_name.replace("_", " ").title()
         file_name_map[file] = {"title": cleaned_title_name}
+    return file_name_map
 
-def get_subdir_data(subdir_path, file_name_map):
-    file_name_map["path"] = subdir_path
+def get_subdir_data(subdir_path, file_name_map, subdir):
+    
     file_name_map["link_list"] = []
-    file_name_map["subdir"] = os.path.basename(subdir_path)
 
     for file in list(file_name_map.keys()):
+        if file == "" or file == None:
+            continue
+        if file == "link_list":
+            continue
         link_path = os.path.join(subdir_path, file)
-        link = Link.Inline.new_link(link_path, file_name_map["name"])
+        link = Link.Inline.new_link(link_path, file_name_map[file]["title"])
         file_name_map[file]["link"] = link
         file_name_map["link_list"].append(link)
+    file_name_map["link_list"].sort()
+    file_name_map["path"] = subdir_path if not None else ""
+    file_name_map["subdir"] = subdir
 
-    subdir_data= file_name_map
+    subdir_data = file_name_map
     return subdir_data
