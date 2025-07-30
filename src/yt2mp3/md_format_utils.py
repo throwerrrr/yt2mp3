@@ -35,7 +35,6 @@ def get_names_from_mp3_files(file_list, is_genre):
     return file_name_map
 
 def get_subdir_data(subdir_path, file_name_map, subdir):
-    
     file_name_map["link_list"] = []
 
     for file in list(file_name_map.keys()):
@@ -43,7 +42,7 @@ def get_subdir_data(subdir_path, file_name_map, subdir):
             continue
         if file == "link_list":
             continue
-        link_path = os.path.join(subdir_path, file)
+        link_path = os.path.join(subdir, file)
         link = Link.Inline.new_link(link_path, file_name_map[file]["title"])
         file_name_map[file]["link"] = link
         file_name_map["link_list"].append(link)
