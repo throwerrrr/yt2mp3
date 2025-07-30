@@ -1,20 +1,36 @@
 # src/yt2mp3/mp3_converter.py
-import subprocess
-from src.yt2mp3.arg_parser import MP3ConverterArgParser
-from src.yt2mp3.file_handler import FileHandler
-from src.yt2mp3.md_tracker import MDTracker
+import subprocess, os
+CWD = os.getcwd()
 
-class MP3Converter:
-    def __init__(self, argv=None, link=None, artist=None, song=None, genre=None, subdir=None, dir=None, filename=None):
-        if argv is not None or all(param is None for param in [link, artist, song, genre, dir, subdir, filename]):
-            self.arg_parser = MP3ConverterArgParser(argv)
-            self.file_handler = self.arg_parser.file_handler
-        else:
-            self.arg_parser = None
-            self.file_handler = FileHandler(link, artist, song, genre, dir, subdir, filename)
-        self.run_command()
-    
-    def run_command(self):
-        result = subprocess.call(["yt-dlp", "-P", self.file_handler.output, "-x", "--audio-format", "mp3", "-o", f"{self.file_handler.filename}.%(ext)s", self.file_handler.link])
-        if result == 0:
-            md_tracker = MDTracker(self.file_handler)
+def generate(args=None, link=None, song=None, artist=None, genre=None, filename=None, subdir=None, dir=None):
+    if args is not None:
+        return {
+            "link":args.link,
+            "song":args.song,
+            "artist":args.artist,
+            "genre":args.genre,
+            "filename":args.filename,
+            "dir": args.dir if args.dir is not None else CWD,
+            "subdir":args.subdir
+        }
+    else:
+        return {
+            "link": link,
+            "song": song,
+            "artist": artist,
+            "genre": genre,
+            "filename": filename,
+            "dir": dir if dir is not None else CWD,
+            "subdir": subdir
+        }
+
+def yt_to_mp3(output, link, filename=None):
+    result = subprocess.call(["yt-dlp", "-P", output, "-x", "--audio-format", "mp3", "-o", f"{filename}.%(ext)s", link])
+    return result
+
+def handle_conversion(result, output, filename):
+    if result != 0:
+        return f"Conversion failed. Details: {result}"
+    else:
+        print(f"Successfully converted {filename}. Stored at {output}.")
+        return result
