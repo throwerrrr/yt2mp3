@@ -10,9 +10,8 @@ Essentially a wrapper for [yt-dlp](https://github.com/yt-dlp/yt-dlp) with fewer 
 - File organization genre or subdirectory
 - Auto-generate markdown documentation with clickable links [More Info](#markdown-documentation)
 - Caching system to track downloads [More Info](#caching-system)
-- 🎵 Two operation modes: Song Mode and Custom Mode [Song-Mode](#-song-mode) [Custom Mode](#-custom-mode)
-- 🔧 CLI and programmatic interfaces [CLI](#command-line-interface-cli)[Programmatic Interfaces](#programmatic-interface)
-- 📋 Input validation and error handling [Error Handling](#error-handling)
+- Two operation modes: Song Mode and Custom Mode [Song-Mode](#song-mode) [Custom Mode](#custom-mode)
+- CLI and programmatic interfaces [CLI](#command-line-interface-cli)[Programmatic Interfaces](#programmatic-interface)
 
 ## Quick Start
 
