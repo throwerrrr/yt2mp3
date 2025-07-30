@@ -303,7 +303,10 @@ def main(link=None, song=None, artist=None, genre=None, filename=None, subdir=No
 
 
 if __name__ == "__main__":
-    main(link="https://www.youtube.com/watch?v=uIQLj8xmnS0", song="cinematic-piano", artist="summit-alex_productions", genre="test-mode")
+    import os
+    example_dir = os.path.join(CWD, 'Examples')
+    main(link="https://www.youtube.com/watch?v=uIQLj8xmnS0", song="cinematic-piano", artist="summit-alex_productions", genre="Instrumental", dir=example_dir)
+
     # main()
 
     # -------- --------
@@ -312,7 +315,7 @@ if __name__ == "__main__":
     # 2. Uncomment `main()`
     # 3. run command ↓
 
-    # python main.py -l "https://www.youtube.com/watch?v=uIQLj8xmnS0" -s "cinematic-piano" -a "summit-alex_productions" -g "test-mode"
+    # python main.py -l "https://www.youtube.com/watch?v=uIQLj8xmnS0" -s "cinematic-piano" -a "summit-alex_productions" -g "test-mode" -d "./Examples"
 
     # -------- -------- -------- --------
 
