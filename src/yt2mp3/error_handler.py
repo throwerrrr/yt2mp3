@@ -1,6 +1,5 @@
 # src/yt2mp3/error_handler.py
 import os
-CWD = os.getcwd()
 
 def raise_errors(link=None, song=None, artist=None, genre=None, dir=None, subdir=None, filename=None):
     params = [link, song, artist, genre, dir, subdir, filename]
@@ -12,7 +11,10 @@ def raise_errors(link=None, song=None, artist=None, genre=None, dir=None, subdir
         raise ValueError("Please provide either song or filename.")
     elif genre == None and subdir == None:
         raise ValueError("Please provide genre or subdirectory name.")
-    return True
+    elif dir == None:
+        raise ValueError("There was an error assigning a default directory value.")
+    else:
+        return True
         
 def check_song_mode_errors(song=None, artist=None, genre=None):
     song_mode_args = [song, artist, genre]

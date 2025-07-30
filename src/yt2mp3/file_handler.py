@@ -4,26 +4,29 @@ from urllib.parse import urlparse
 CWD = os.getcwd()
 
 class FileHandler:
-    def __init__(self, link, dir=CWD, artist=None, song=None, genre=None, subdir=None, filename=None, song_mode=True):
+    def __init__(self, song_mode, input_data=None):
+        self.input_data = input_data
+        self.song_mode = song_mode
+
+    def _process_files(self, link, song_mode, song=None, artist=None, genre=None, dir=CWD if None else dir, subdir=None, filename=None):
+        if self.input_data is None or self.song_mode is None:
+            return f"Input data empty; can't set attributes."
         self.link = self.validate_url(link)
         self.dir = dir
         self.song_mode = song_mode
 
         if self.song_mode == True:
-            self.get_song_mode_attr(song, artist, genre)
+            self.create_filename(song, artist)
+            self.subdir = self.sanitize_text(genre.title())
 
         elif self.song_mode == False:
-            self.get_other_mode_attr(subdir, filename)
+            self.filename = self.sanitize_text(filename)
+            self.subdir = self.sanitize_text(subdir)
 
         self.output = os.path.join(self.dir, self.subdir)
 
-    def get_song_mode_attr(self, song, artist, genre):
-        self.filename = self.filename = self.sanitize_text(f"{artist.title()}_{song.title()}")
-        self.subdir = self.sanitize_text(genre.title())
-    
-    def get_other_mode_attr(self, subdir, filename):
-        self.subdir = self.sanitize_text(subdir)
-        self.filename = self.sanitize_text(filename)
+    def create_filename(self, song, artist):
+        self.filename = self.sanitize_text(f"{artist.title()}_{song.title()}")
 
     def sanitize_text(self, text):
         if not isinstance(text, str):
