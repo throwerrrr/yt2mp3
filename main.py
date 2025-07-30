@@ -36,7 +36,7 @@ class InputProcessor:
         if self.args.link:
             return mp3_converter.generate(args=self.args)
         else:
-            return mp3_converter.generate(
+            return mp3_converter.generate( # test song
                 link="https://www.youtube.com/watch?v=JU2DArD9NRg", 
                 song="test_song", 
                 artist="test_artist", 
@@ -297,11 +297,23 @@ def main(link=None, song=None, artist=None, genre=None, filename=None, subdir=No
     else:
         print("Skipping MP3 conversion (skip_conversion=True or no link provided)")
     
-    # MD FILES
     result = app.run(md_file_manager, file_processor, handler, input_data, song_mode)
     
     return result
 
 
 if __name__ == "__main__":
-    main(link="https://www.youtube.com/watch?v=W4ocPPhtglU", song="Come Back to Earth", artist="Mac miller", genre="HipHop")
+    main(link="https://www.youtube.com/watch?v=uIQLj8xmnS0", song="cinematic-piano", artist="summit-alex_productions", genre="test-mode")
+    # main()
+
+    # -------- --------
+    # to test CLI: 
+    # 1. Comment out `main(link=...)`
+    # 2. Uncomment `main()`
+    # 3. run command ↓
+
+    # python main.py -l "https://www.youtube.com/watch?v=uIQLj8xmnS0" -s "cinematic-piano" -a "summit-alex_productions" -g "test-mode"
+
+    # -------- -------- -------- --------
+
+    # Song: Cinematic Piano | Summit Alex-Productions
